@@ -1,12 +1,16 @@
-import { Page } from "playwright";
-import { LoginSelectors } from "../utils/enums";
+import { Page, Locator } from "playwright";
 import { BASE_URL } from "../config/config";
 
-export class LoginPage {
-    private page: Page;
+export default class LoginPage {
+    //locators declarados como readonly
+    readonly usernameInput: Locator;
+    readonly passwordInput: Locator;
+    readonly loginButton: Locator;
 
-    constructor(page: Page){
-        this.page = page;
+    constructor(private readonly page: Page){
+        this.usernameInput = this.page.locator('#user-name');
+        this.passwordInput = this.page.locator('#password');
+        this.loginButton = this.page.locator('#login-button');
     }
 
     async navigate() {
@@ -14,9 +18,9 @@ export class LoginPage {
     }
 
     async login(username: string, password: string) {
-        await this.page.fill(LoginSelectors.USERNAME_INPUT, username);
-        await this.page.fill(LoginSelectors.PASSWORD_INPUT, password);
-        await this.page.click(LoginSelectors.LOGIN_BUTTON);
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginButton.click();
     }
 
     //metodo publico para obtener la URL actual
