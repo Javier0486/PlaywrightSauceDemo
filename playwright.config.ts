@@ -5,7 +5,10 @@ const config: PlaywrightTestConfig = {
     use: {
         browserName: 'chromium',
         headless: false, //se ejecuta en modo headless (sin interfaz grafica) o no
-        viewport: { width: 1280, height: 720 }, //tamaño de la ventana del navegador
+        viewport: null, //tamaño de la ventana del navegador
+        launchOptions: {
+            args: ['--start-maximized'],
+        },
         screenshot: 'only-on-failure', //captura screenshots solo en caso de fallos
         trace: 'retain-on-failure', //guarda trazas solo en caso de fallos
     },

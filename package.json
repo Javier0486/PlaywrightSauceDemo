@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "soloTest": "npx playwright test itemsAddedInCartValidation.spec.ts --headed"
+    "soloTest": "npx playwright test [testName.spec.ts] --repeat-each=5"
   },
   "keywords": [],
   "author": "",

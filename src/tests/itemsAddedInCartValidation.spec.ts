@@ -1,5 +1,6 @@
 import { expect, test } from "../utils/fixtures";
 import { USERNAME, PASSWORD } from "../config/config";
+import { productsInHomepage } from "../utils/productsEnum";
 
 test.describe('Test para validar que los productos agregados al carrito sean los esperados', () => {
     test('Agregar productos al carrito y verificar', async ({ 
@@ -7,7 +8,8 @@ test.describe('Test para validar que los productos agregados al carrito sean los
         swagLabsPage,
         cartPage
     }) => {
-    
+        const productsSelected: string[] = [productsInHomepage.backPAck, productsInHomepage.bikeLight];
+
         await test.step('Step 1: login to the page', async () => {
             //iniciar sesion
             await loginPage.navigate();
@@ -15,8 +17,7 @@ test.describe('Test para validar que los productos agregados al carrito sean los
         })
 
         await test.step('Step 2: Agregar productos al carrito', async () => {
-            await swagLabsPage.addProductToCart('Sauce Labs Backpack');
-            await swagLabsPage.addProductToCart('Sauce Labs Bike Light');
+            await swagLabsPage.addProductToCart(productsSelected);
         })
 
         await test.step('Step 3: Ir al carrito', async () => {
