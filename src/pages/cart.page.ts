@@ -8,6 +8,7 @@ export class CartPage {
     readonly cartItem: Locator;
     readonly checkoutButton: Locator;
     readonly itemPrice: (productName: string) => Locator;
+    readonly continueShoppingButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -15,12 +16,13 @@ export class CartPage {
         //inicializamos locators
         this.cartItem = this.page.locator('.cart_item');
         this.checkoutButton = this.page.locator('#checkout');
-        this.itemPrice = (productName) => this.page.locator(`//div[normalize-space(text())='${productName}']/ancestor::div[@class='cart_item_label']//div[@class='inventory_item_price']`)
+        this.itemPrice = (productName) => this.page.locator(`//div[normalize-space(text())='${productName}']/ancestor::div[@class='cart_item_label']//div[@class='inventory_item_price']`);
+        this.continueShoppingButton = this.page.locator('#continue-shopping');
     }
 
     //metodo para verificar si un producto esta en el carrito
     public async isProductInCart(productName: string) {
-        const productLocator = this.page.locator(`text=${productName}`);
+        const productLocator = this.page.locator(`//div[normalize-space(text())='${productName}']`);
         expect(await productLocator.isVisible());
     }
 
@@ -33,6 +35,11 @@ export class CartPage {
     //metodo para proceder al checkout
     async proceedToCheckout() {
         await this.checkoutButton.click();
+    }
+
+    //method to continue shopping
+    async continueShopping() {
+        await this.continueShoppingButton.click();
     }
 
     //metodo para veridicar los precios de los productos en el carrito

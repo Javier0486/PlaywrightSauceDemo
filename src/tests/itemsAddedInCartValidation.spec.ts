@@ -1,4 +1,4 @@
-import { expect, test } from "../utils/fixtures";
+import { test } from "../utils/fixtures";
 import { USERNAME, PASSWORD } from "../config/config";
 import { productsInHomepage } from "../utils/productsEnum";
 
