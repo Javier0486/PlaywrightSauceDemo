@@ -12,6 +12,8 @@ export default class SwagLabsPage {
     readonly cartNumberOfItems: Locator;
     readonly burgerMenu: Locator;
     readonly resetAppState: Locator;
+    readonly pricesLocator: Locator;
+    readonly sortByDropdownLocator: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -25,6 +27,8 @@ export default class SwagLabsPage {
         this.cartNumberOfItems = this.page.locator('.shopping_cart_link');
         this.burgerMenu = this.page.locator('#react-burger-menu-btn');
         this.resetAppState = this.page.locator('#reset_sidebar_link');
+        this.pricesLocator = this.page.locator(`//div[@class='inventory_item_price']`);
+        this.sortByDropdownLocator = this.page.locator('.product_sort_container');
     }
 
     //metodo para agregar productos al carrito
@@ -54,6 +58,26 @@ export default class SwagLabsPage {
         await this.resetAppState.click();
         await this.page.waitForTimeout(1000);
         await expect(await this.cartNumberOfItems.isVisible()).toBeTruthy();
+    }
+
+    private async takePrices() {
+        let prices: string[] = [];
+        const pricesList = await this.pricesLocator.allInnerTexts();
+        for (let i=0; i<pricesList.length; i++) {
+            prices.push(pricesList[i].trim());
+        }
+        return prices;
+    }
+
+    public async validatePricesSortedHighToLow(){
+        let prices = await this.takePrices();
+        let pricesSorted = prices.sort((a, b) => parseFloat(b) - parseFloat(a));
+        expect(prices).toEqual(pricesSorted);
+    }
+
+    public async sortBy(sortBy: string){
+        await this.sortByDropdownLocator.click();
+        await this.sortByDropdownLocator.selectOption({value: sortBy});
     }
 
 }
