@@ -1,3 +1,4 @@
+import exp from "constants";
 import { Page, Locator } from "playwright";
 import { expect } from "playwright/test";
 
@@ -69,10 +70,24 @@ export default class SwagLabsPage {
         return prices;
     }
 
-    public async validatePricesSortedHighToLow(){
-        let prices = await this.takePrices();
-        let pricesSorted = prices.sort((a, b) => parseFloat(b) - parseFloat(a));
-        expect(prices).toEqual(pricesSorted);
+    public async validateSortedFunctionality(sortBy: string){
+        if(sortBy == 'hilo') {
+            let prices = await this.takePrices();
+            let pricesSorted = prices.sort((a, b) => parseFloat(b) - parseFloat(a));
+            console.log(`prices is: ${prices} and pricesSorted is: ${pricesSorted}`);
+            expect(prices).toEqual(pricesSorted);
+        } else if (sortBy == 'lohi') {
+            let prices = await this.takePrices();
+            let pricesSorted = prices.sort((a, b) => parseFloat(a) - parseFloat(b));
+            console.log(`prices is: ${prices} and pricesSorted is: ${pricesSorted}`);
+            expect(prices).toEqual(pricesSorted);
+        } else if (sortBy == 'za') {
+
+        } else if (sortBy == 'az'){
+
+        } else {
+            throw new Error('Ivalid Sort by option');
+        }
     }
 
     public async sortBy(sortBy: string){
