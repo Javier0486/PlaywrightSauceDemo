@@ -13,8 +13,8 @@ export default class LoginPage {
         this.loginButton = this.page.locator('#login-button');
     }
 
-    async navigate() {
-        await this.page.goto(BASE_URL);
+    async navigate(url: string = BASE_URL) {
+        await this.page.goto(url);
     }
 
     async login(username: string, password: string) {
