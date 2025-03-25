@@ -70,6 +70,15 @@ export default class SwagLabsPage {
         return prices;
     }
 
+    private async takeProductsName() {
+        let names: string[] = [];
+        const namesList = await this.productTitle.allInnerTexts();
+        for (let i=0; i<namesList.length; i++) {
+            names.push(namesList[i].trim());
+        }
+        return names;
+    }
+
     public async validateSortedFunctionality(sortBy: string){
         if(sortBy == 'hilo') {
             let prices = await this.takePrices();
@@ -82,7 +91,10 @@ export default class SwagLabsPage {
             console.log(`prices is: ${prices} and pricesSorted is: ${pricesSorted}`);
             expect(prices).toEqual(pricesSorted);
         } else if (sortBy == 'za') {
-
+            let products = await this.takeProductsName();
+            let stringSortedZtoA = products.slice().sort((a, b) => b.localeCompare(a));
+            console.log(`products taken from page are: ${products} and sorted from Z to A are: ${stringSortedZtoA}`);
+            expect(products).toEqual(stringSortedZtoA);
         } else if (sortBy == 'az'){
 
         } else {
