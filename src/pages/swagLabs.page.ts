@@ -96,7 +96,10 @@ export default class SwagLabsPage {
             console.log(`products taken from page are: ${products} and sorted from Z to A are: ${stringSortedZtoA}`);
             expect(products).toEqual(stringSortedZtoA);
         } else if (sortBy == 'az'){
-
+            let products = await this.takeProductsName();
+            let stringSortedAtoZ = await products.slice().sort();
+            console.log(`products taken from page are: ${products} and sorted from Z to A are: ${stringSortedAtoZ}`);
+            expect(products).toEqual(stringSortedAtoZ);
         } else {
             throw new Error('Ivalid Sort by option');
         }
