@@ -1,0 +1,1 @@
+## USar Git Bash como terminal
