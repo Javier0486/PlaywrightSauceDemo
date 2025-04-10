@@ -1,5 +1,6 @@
 import { Page, Locator } from "playwright";
 import { BASE_URL } from "../config/config";
+import { url } from "inspector";
 
 export default class LoginPage {
     //locators declarados como readonly
