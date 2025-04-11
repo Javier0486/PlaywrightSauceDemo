@@ -8,6 +8,10 @@ import Ajv, { JSONSchemaType } from "ajv";
 * 
 */
 // API request and schema validation logic
+/*
+* Utility Class Patern
+* 
+*/
 export class ApiUtils {
     private apiContext: APIRequestContext;
     private ajv: Ajv;
