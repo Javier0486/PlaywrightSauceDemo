@@ -1,7 +1,11 @@
 import { Page } from "playwright";
 
-export class PageUtils {
-    static async getCurrentUrl(page: Page): Promise<string> {
+/**
+ * Utility class for common page operations
+ * Contains reusable static methods
+ */
+export class PageUtils { // Utility Pattern
+    static async getCurrentUrl(page: Page): Promise<string> { // Reusable utility
         return page.url();
     }
 
@@ -12,3 +16,11 @@ export class PageUtils {
         }
     }
 }
+
+/*
+* This provides utility fiunctions that:
+* - Offer common page operations
+* - Can be used across different pages/tests
+* - Promote code reuse
+*
+*/

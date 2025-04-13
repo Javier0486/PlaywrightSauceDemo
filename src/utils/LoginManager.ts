@@ -3,15 +3,19 @@ import { ENV_CONFIG } from "../config/config";
 import { Page } from "playwright";
 import { LOCATORS } from "../config/locators";
 
-export class LoginManager {
+/**
+ * Centralized login management for multiple applications
+ * Implements Facade pattern to simplify login operations
+ */
+export class LoginManager { // Facade Pattern implementation
     constructor(private readonly page: Page) {}
 
-    async loginToSauceDemo() {
+    async loginToSauceDemo() { // Simplified interface for login
         const { BASE_URL, credentials } = ENV_CONFIG;
         const { saucedemo } = LOCATORS;
 
         // Pass locators dinamycally
-        const loginPage = new LoginPage(
+        const loginPage = new LoginPage( // Uses Page Object internally
             this.page,
             saucedemo.usernameSelector,
             saucedemo.passwordSelector,
@@ -33,8 +37,16 @@ export class LoginManager {
             automationExercise.passwordSelector,
             automationExercise.loginButtonSelector
         );
-        
+
         await loginPage.navigate(AE_URL);
         await loginPage.login(credentials.automationExercise.AEUSERNAME, credentials.automationExercise.AEPASSWORD);
     }
 }
+
+/*
+* This acts as a facade that:
+* - Simplifies complex login operations
+* - Provides a unified interface to login to different systems
+* - Hides implementation details from tests
+*
+*/

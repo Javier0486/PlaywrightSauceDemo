@@ -1,7 +1,10 @@
 import { Page, Locator } from "playwright";
 import { ENV_CONFIG } from "../config/config";
 
-
+/**
+ * Page Object for login page
+ * Encapsulates all login page interactions and selectors
+ */
 export default class LoginPage {
     //locators
     readonly usernameInput: Locator;
