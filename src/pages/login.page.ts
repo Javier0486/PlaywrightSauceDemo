@@ -1,24 +1,29 @@
 import { Page, Locator } from "playwright";
-import { BASE_URL } from "../config/config";
-import { url } from "inspector";
+import { ENV_CONFIG } from "../config/config";
+
 
 export default class LoginPage {
-    //locators declarados como readonly
+    //locators
     readonly usernameInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
 
-    constructor(private readonly page: Page){
-        this.usernameInput = this.page.locator('#user-name');
-        this.passwordInput = this.page.locator('#password');
-        this.loginButton = this.page.locator('#login-button');
+    constructor(
+        private readonly page: Page,
+        private readonly usernameSelector: string,
+        private readonly passwordSelector: string,
+        private readonly loginButtonSelector: string
+    ){
+        this.usernameInput = this.page.locator(this.usernameSelector);
+        this.passwordInput = this.page.locator(this.passwordSelector);
+        this.loginButton = this.page.locator(this.loginButtonSelector);
     }
 
-    async navigate(url: string = BASE_URL) {
+    async navigate(url: string): Promise<void> {
         await this.page.goto(url);
     }
 
-    async login(username: string, password: string) {
+    async login(username: string, password: string): Promise<void> {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
