@@ -1,19 +1,20 @@
-import { test } from "../utils/fixtures";
-import { USERNAME, PASSWORD } from "../config/config";
+import { expect, test } from "../utils/fixtures";
+import { LoginManager } from "../utils/LoginManager";
 import { productsInHomepage } from "../utils/productsEnum";
 
 test.describe('Test para validar que los productos agregados al carrito sean los esperados', () => {
     test('Agregar productos al carrito y verificar', async ({ 
-        loginPage,
+        page,
         swagLabsPage,
         cartPage
     }) => {
         const productsSelected: string[] = [productsInHomepage.backPAck, productsInHomepage.bikeLight];
 
-        await test.step('Step 1: login to the page', async () => {
-            //iniciar sesion
-            await loginPage.navigate();
-            await loginPage.login(USERNAME, PASSWORD);
+        await test.step('Step 1: login to SauceDemo page', async () => {
+            const loginManager = new LoginManager(page);
+            await loginManager.loginToSauceDemo();
+            const currentUrl = await page.url();
+            expect(currentUrl).toMatch(/inventory.html/);
         })
 
         await test.step('Step 2: Agregar productos al carrito', async () => {
