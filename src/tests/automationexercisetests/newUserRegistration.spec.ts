@@ -1,9 +1,10 @@
 import { aeTopMenuOptions } from "../../utils/aeMenuOptionsEnum";
-import { PageUtils } from "../../utils/takePageUrl";
-import { expect, test } from "../../utils/fixtures";
+import { PageUtils } from "../../utils/PageUtils";
+import { expect } from "playwright/test";
+import { test } from "../../utils/fixtures";
 import { AEUrls } from "../../utils/aeUrlsEnum";
 import { AEElementFieldsSignupLogin } from "../../utils/inputSigupLoginEnum";
-import { AE_URL } from "../../config/config";
+import { ENV_CONFIG } from "../../config/config";
 
 test.describe(`Test Automation Exercise page`, () => {
     test('Register a new user', async ({
@@ -12,7 +13,6 @@ test.describe(`Test Automation Exercise page`, () => {
         aeSignupLoginPage,
         aeEnterAccountInfoPage,
         aeAccountCreatedPage,
-        loginPage,
     }) => {
         const newDate = new Date();
         const formatted = newDate.toISOString().replace(/[-:T.Z]/g, '').slice(0, 14); //YYYYMMDDHHMMSS
@@ -35,12 +35,7 @@ test.describe(`Test Automation Exercise page`, () => {
         const mobileNumber = '4412525896';
 
         await test.step('Step 1: go to Signup/Login page', async () => {
-            await loginPage.navigate(AE_URL);
-            await aeHomePage.menusLocator(menuOption).waitFor({ state: 'visible' });
-            await aeHomePage.clickMenuElements(menuOption);
-
-            await page.waitForURL(signloginUrl);
-            await expect(await PageUtils.getCurrentUrl(page)).toEqual(signloginUrl);
+            await page.goto(ENV_CONFIG.AE_URL);
         })
 
         await test.step('Step 2: Add the data to the fields', async () => {

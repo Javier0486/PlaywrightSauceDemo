@@ -4,18 +4,26 @@ import { Page } from "playwright";
 import { LOCATORS } from "../config/locators";
 
 /**
- * Centralized login management for multiple applications
- * Implements Facade pattern to simplify login operations
+ * Implements Facade Pattern to provide a simplified interface for login operations
+ * across multiple applications. Acts as a facade that:
+ * - Provides a unified interface for authentication across systems
+ * - Abstracts complex login operations behind simple methods
+ * - Centralizes locator management and navigation
+ * - Shields tests from implementation changes in login flows
  */
 export class LoginManager { // Facade Pattern implementation
     constructor(private readonly page: Page) {}
 
-    async loginToSauceDemo() { // Simplified interface for login
+    /**
+     * Executes complete SauceDemo login flow using configured credentials
+     * @returns Promise<void>
+     */
+    async loginToSauceDemo() {
         const { BASE_URL, credentials } = ENV_CONFIG;
         const { saucedemo } = LOCATORS;
 
-        // Pass locators dinamycally
-        const loginPage = new LoginPage( // Uses Page Object internally
+        // Initialize LoginPage with SauceDemo-specific locators
+        const loginPage = new LoginPage( 
             this.page,
             saucedemo.usernameSelector,
             saucedemo.passwordSelector,
@@ -26,11 +34,15 @@ export class LoginManager { // Facade Pattern implementation
         await loginPage.login(credentials.saucedemo.USERNAME, credentials.saucedemo.PASSWORD);
     }
 
+    /**
+     * Executes complete AutomationExercise login flow using configured credentials
+     * @returns Promise<void>
+     */
     async loginToAutomationExercise() {
         const { AE_URL, credentials } = ENV_CONFIG;
         const { automationExercise } = LOCATORS;
 
-        // Pass locators dynamically
+        // Initialize LoginPage with AutomationExercise-specific locators
         const loginPage = new LoginPage(
             this.page,
             automationExercise.usernameSelector,
@@ -42,11 +54,3 @@ export class LoginManager { // Facade Pattern implementation
         await loginPage.login(credentials.automationExercise.AEUSERNAME, credentials.automationExercise.AEPASSWORD);
     }
 }
-
-/*
-* This acts as a facade that:
-* - Simplifies complex login operations
-* - Provides a unified interface to login to different systems
-* - Hides implementation details from tests
-*
-*/

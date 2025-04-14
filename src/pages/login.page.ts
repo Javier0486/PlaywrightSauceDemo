@@ -2,8 +2,14 @@ import { Page, Locator } from "playwright";
 import { ENV_CONFIG } from "../config/config";
 
 /**
- * Page Object for login page
- * Encapsulates all login page interactions and selectors
+ * Page Object Model for login page functionality.
+ * Encapsulates all login-related interactions and selectors.
+ * 
+ * Key Responsibilities:
+ * - Managing login page locators
+ * - Performing login actions
+ * - Handling page navigation
+ * - Providing current URL information
  */
 export default class LoginPage {
     //locators
@@ -11,6 +17,13 @@ export default class LoginPage {
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
 
+    /**
+     * Creates a new LoginPage instance
+     * @param page Playwright Page object
+     * @param usernameSelector Selector for username input field
+     * @param passwordSelector Selector for password input field
+     * @param loginButtonSelector Selector for login button
+     */
     constructor(
         private readonly page: Page,
         private readonly usernameSelector: string,
@@ -22,17 +35,29 @@ export default class LoginPage {
         this.loginButton = this.page.locator(this.loginButtonSelector);
     }
 
+    /**
+     * Navigates to the specified URL
+     * @param url The URL to navigate to
+     */
     async navigate(url: string): Promise<void> {
         await this.page.goto(url);
     }
 
+    /**
+     * Performs login with provided credentials
+     * @param username The username to enter
+     * @param password The password to enter
+     */
     async login(username: string, password: string): Promise<void> {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
 
-    //metodo publico para obtener la URL actual
+    /**
+     * Gets the current page URL
+     * @returns Promise resolving to current URL string
+     */
     async getCurrentUrl(): Promise<string> {
         return this.page.url();
     }

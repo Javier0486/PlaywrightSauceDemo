@@ -1,17 +1,15 @@
 import { APIRequestContext } from "playwright";
 import Ajv, { JSONSchemaType } from "ajv";
 
-// class to handle common API operations - Design pattern used: Separation of Concerns
 /*
-* ApiUtils class encapsulates common API operations (GET, schema validation, etc.), reducing duplication across tests.
-* This makes the framework modular and easier to extend (eg. adding POST, PUT, or DELETE methods)
-* 
-*/
-// API request and schema validation logic
-/*
-* Utility Class Patern
-* 
-*/
+ * Encapsulates common API operations (GET, schema validation) for
+ * reusability across tests.
+ * Design Patterns:
+ * - Separation of Concerns: Isolates API logic from test scripts.
+ * - Utility Class Pattern: Centralizes reusable methods.
+ * 
+ * Extensible: Can be expanded with additional methods (POST, PUT, DELETE).
+ */
 export class ApiUtils {
     private apiContext: APIRequestContext;
     private ajv: Ajv;
@@ -21,6 +19,10 @@ export class ApiUtils {
         this.ajv = new Ajv(); // initialize AJV for schema validation
     }
 
+    /*
+     * Sends a GET request to the specified endpoint.
+     * @throws Error if the response status is not OK (2xx).
+     */
     async get(endpoint: string) {
         const response = await this.apiContext.get(endpoint);
         if(!response.ok()) {
@@ -30,9 +32,10 @@ export class ApiUtils {
     }
 
     /*
-    * Reusability: this method can be reused across all API tests.
-    *
-    */
+     * Validates data against a JSON schema. 
+     * @returns Type guard (`data is T`) for type-safe validation.
+     * @throws Error if validation fails.
+     */
     validateSchema<T>(data: unknown, schema: JSONSchemaType<T>): data is T {
         const validate = this.ajv.compile(schema);
         const valid = validate(data);
