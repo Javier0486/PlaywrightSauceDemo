@@ -20,12 +20,7 @@ export const test = base.extend<{
     aeEnterAccountInfoPage: AEEnterAccountInfoPage,
     aeAccountCreatedPage: AEAccountCreatedPage,
  }>({
-    //fixture para LoginPage
-    loginPage: async ({ page }, use) => {
-        const loginPage = new LoginPage(page);
-        await use(loginPage);
-    },
-
+    //fixtures
     swagLabsPage: async ({ page }, use) => {
         const swagLabsPage = new SwagLabsPage(page);
         await use(swagLabsPage);
