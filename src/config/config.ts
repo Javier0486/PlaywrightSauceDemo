@@ -5,7 +5,7 @@
  */
 export const ENV_CONFIG = { // Singleton-like configuration object patter
     BASE_URL: 'https://www.saucedemo.com',
-    AE_URL: 'https://www.automationexercise.com/',
+    AE_URL: 'https://www.automationexercise.com/login',
     credentials: {
         saucedemo: {
             USERNAME: 'standard_user',
