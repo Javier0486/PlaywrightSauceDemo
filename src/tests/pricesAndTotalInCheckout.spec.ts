@@ -1,10 +1,9 @@
 import { test } from "../utils/fixtures";
-import { USERNAME, PASSWORD } from "../config/config";
 import { productsInHomepage } from "../utils/productsEnum";
+import { LoginManager } from "../utils/LoginManager";
 
 test.describe(`Test para validar los precios en carrito y productos en checkout`, () => {
     test('Agregar productos al carrito y verificar precios; verificar productos en checkout', async ({
-        loginPage,
         swagLabsPage,
         cartPage,
         checkoutYourInfoPage,
@@ -16,8 +15,8 @@ test.describe(`Test para validar los precios en carrito y productos en checkout`
 
         await test.step('Step 1: login to the page', async () => {
             //iniciar sesion
-            await loginPage.navigate();
-            await loginPage.login(USERNAME, PASSWORD);
+            const loginManager = new LoginManager(page);
+            await loginManager.loginToSauceDemo();
         })
 
         await test.step('Step 2: Agregar productos al carrito', async () => {
