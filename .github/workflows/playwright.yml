@@ -29,7 +29,10 @@ jobs:
 
       - name: Upload Playwright report (optional)
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: playwright-report
           path: playwright-report/
+
+      - name: Dump GitHub context
+        run: echo "${{ toJson(github) }}"
