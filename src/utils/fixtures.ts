@@ -1,9 +1,9 @@
 import { test as base } from '@playwright/test';
 import LoginPage from '../pages/login.page';
-import SwagLabsPage from '../pages/swagLabs.page';
-import { CartPage } from '../pages/cart.page';
-import CheckoutYourInfoPage from '../pages/checkoutYourInfo.page';
-import { CheckoutOverviewPage } from '../pages/checkoutOverview.page';
+import SwagLabsPage from '../pages/sauce demo/swagLabs.page';
+import { CartPage } from '../pages/sauce demo/cart.page';
+import CheckoutYourInfoPage from '../pages/sauce demo/checkoutYourInfo.page';
+import { CheckoutOverviewPage } from '../pages/sauce demo/checkoutOverview.page';
 import AEHomepage from '../pages/automationexercise/aeHomepage.page';
 import AESignupLoginPage from '../pages/automationexercise/aeSignupLogin.page';
 import AEEnterAccountInfoPage from '../pages/automationexercise/aeEnterAccountInfo.page';

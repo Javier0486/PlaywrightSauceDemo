@@ -1,9 +1,9 @@
-import { aeTopMenuOptions } from "../../utils/aeMenuOptionsEnum";
+import { aeTopMenuOptions } from "../../utils/automationexerciseutils/aeMenuOptionsEnum";
 import { PageUtils } from "../../utils/PageUtils";
 import { expect } from "playwright/test";
 import { test } from "../../utils/fixtures";
-import { AEUrls } from "../../utils/aeUrlsEnum";
-import { AEElementFieldsSignupLogin } from "../../utils/inputSigupLoginEnum";
+import { AEUrls } from "../../utils/automationexerciseutils/aeUrlsEnum";
+import { AEElementFieldsSignupLogin } from "../../utils/automationexerciseutils/inputSigupLoginEnum";
 import { ENV_CONFIG } from "../../config/config";
 
 test.describe(`Test Automation Exercise page`, () => {

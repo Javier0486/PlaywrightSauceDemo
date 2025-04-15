@@ -1,7 +1,7 @@
-import { aeTopMenuOptions } from "../../utils/aeMenuOptionsEnum";
+import { aeTopMenuOptions } from "../../utils/automationexerciseutils/aeMenuOptionsEnum";
 import { expect, test } from "../../utils/fixtures";
-import { AEUrls } from "../../utils/aeUrlsEnum";
-import { AEElementFieldsSignupLogin } from "../../utils/inputSigupLoginEnum";
+import { AEUrls } from "../../utils/automationexerciseutils/aeUrlsEnum";
+import { AEElementFieldsSignupLogin } from "../../utils/automationexerciseutils/inputSigupLoginEnum";
 import { LoginManager } from "../../utils/LoginManager";
 import { PageUtils } from "../../utils/PageUtils";
 

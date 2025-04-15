@@ -1,6 +1,6 @@
-import { test } from "../utils/fixtures";
-import { LoginManager } from "../utils/LoginManager";
-import { sortByEnum } from "../utils/sortByEnums";
+import { test } from "../../utils/fixtures";
+import { LoginManager } from "../../utils/LoginManager";
+import { sortByEnum } from "../../utils/saucedemoutils/sortByEnums";
 
 test.describe(`test to validate product are sorted by high to low price`, () => {
     test('Sort products by high to low price', async ({

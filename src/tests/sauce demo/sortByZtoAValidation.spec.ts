@@ -1,6 +1,6 @@
-import { test } from "../utils/fixtures";
-import { LoginManager } from "../utils/LoginManager";
-import { sortByEnum } from "../utils/sortByEnums";
+import { test } from "../../utils/fixtures";
+import { LoginManager } from "../../utils/LoginManager";
+import { sortByEnum } from "../../utils/saucedemoutils/sortByEnums";
 
 test.describe('test to validate products are sorted by Z to A', () =>{
     test('Sort product by Z to A', async ({
