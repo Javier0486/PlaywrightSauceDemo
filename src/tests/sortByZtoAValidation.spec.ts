@@ -1,17 +1,17 @@
 import { test } from "../utils/fixtures";
-import { USERNAME, PASSWORD } from "../config/config";
+import { LoginManager } from "../utils/LoginManager";
 import { sortByEnum } from "../utils/sortByEnums";
 
 test.describe('test to validate products are sorted by Z to A', () =>{
     test('Sort product by Z to A', async ({
-        loginPage,
+        page,
         swagLabsPage
     }) => {
         const sortBy = sortByEnum.ZtoA;
 
         await test.step('Step1: login to the page', async () => {
-            await loginPage.navigate();
-            await loginPage.login(USERNAME, PASSWORD);
+            const loginManager = new LoginManager(page);
+            loginManager.loginToSauceDemo();
         })
 
         await test.step('Step 2: Sort products by Z to A', async () => {
