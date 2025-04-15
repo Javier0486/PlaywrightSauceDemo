@@ -1,6 +1,6 @@
-import { test } from "../utils/fixtures";
-import { productsInHomepage } from "../utils/productsEnum";
-import { LoginManager } from "../utils/LoginManager";
+import { test } from "../../utils/fixtures";
+import { productsInHomepage } from "../../utils/saucedemoutils/productsEnum";
+import { LoginManager } from "../../utils/LoginManager";
 
 test.describe('test to validate Reset App State functionality', () => {
     test('Add products to the cart and validate no products are in the cart after Resetting App State', async ({

@@ -1,6 +1,6 @@
-import { expect, test } from "../utils/fixtures";
-import { LoginManager } from "../utils/LoginManager";
-import { productsInHomepage } from "../utils/productsEnum";
+import { expect, test } from "../../utils/fixtures";
+import { LoginManager } from "../../utils/LoginManager";
+import { productsInHomepage } from "../../utils/saucedemoutils/productsEnum";
 
 test.describe('Test para validar que los productos agregados al carrito sean los esperados', () => {
     test('Agregar productos al carrito y verificar', async ({ 
