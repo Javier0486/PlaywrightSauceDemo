@@ -1,10 +1,10 @@
 import { test } from "../utils/fixtures";
-import { USERNAME, PASSWORD } from "../config/config";
 import { productsInHomepage } from "../utils/productsEnum";
+import { LoginManager } from "../utils/LoginManager";
 
 test.describe('test to validate Reset App State functionality', () => {
     test('Add products to the cart and validate no products are in the cart after Resetting App State', async ({
-        loginPage,
+        page,
         swagLabsPage,
         cartPage,
     }) => {
@@ -16,8 +16,8 @@ test.describe('test to validate Reset App State functionality', () => {
 
         await test.step('Step 1: Login to the page', async () => {
             //login to the page
-            await loginPage.navigate();
-            await loginPage.login(USERNAME, PASSWORD);
+            const loginManager = new LoginManager(page);
+            await loginManager.loginToSauceDemo();
         })
 
         await test.step('Step 2: Add products to the cart', async () => {
