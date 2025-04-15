@@ -28,7 +28,7 @@ export class ApiUtils {
         if(!response.ok()) {
             throw new Error(`GET ${endpoint} failed with status ${response.status()}`);
         }
-        return response.json();
+        return { status: response.status(), json: await response.json() };
     }
 
     /*
