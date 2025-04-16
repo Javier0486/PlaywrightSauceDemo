@@ -1,6 +1,6 @@
 import { test, expect, request } from '@playwright/test';
 import { ApiUtils } from '../../utils/apiUtils/apiUtils';
-import { AE_GETPRODUCTS_URL } from '../../config/config';
+import { AE_API_URL } from '../../config/config';
 import { productsListSchema } from '../../utils/apiUtils/productsListSchema';
 import { ProductsListResponse } from '../../types/apiTypes';
 
@@ -19,9 +19,8 @@ test.describe('API validation: Get All Products List', () => {
         const apiUtils = new ApiUtils(apiContext);
 
         // API Execution
-        const { status, json } = await apiUtils.get(`${AE_GETPRODUCTS_URL}/productsList`);
+        const { status, json } = await apiUtils.get(`${AE_API_URL}/productsList`);
 
-        // 
         console.log(`Status code: ${status}`);
         console.log(`Response JSON: `, json);
 
