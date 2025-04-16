@@ -28,4 +28,4 @@ export const ENV_CONFIG = {
 /**
  * AutomationExercise API endpoint for product data
  */
-export const AE_GETPRODUCTS_URL = 'https://automationexercise.com/api';
+export const AE_API_URL = 'https://automationexercise.com/api';

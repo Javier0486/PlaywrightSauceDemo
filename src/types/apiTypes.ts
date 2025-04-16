@@ -29,3 +29,13 @@ export interface ProductsListResponse {
     responseCode: number;
     products: Product[]
 }
+
+export interface Brand {
+    id: number;
+    brand: string;
+}
+
+export interface BrandsListResponse {
+    responseCode: number;
+    brands: Brand[];
+}
