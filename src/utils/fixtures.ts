@@ -8,6 +8,7 @@ import AEHomepage from '../pages/automationexercise/aeHomepage.page';
 import AESignupLoginPage from '../pages/automationexercise/aeSignupLogin.page';
 import AEEnterAccountInfoPage from '../pages/automationexercise/aeEnterAccountInfo.page';
 import AEAccountCreatedPage from '../pages/automationexercise/aeAccountCreated.page';
+import AECartPage from '../pages/automationexercise/aeCart.page';
 
 export const test = base.extend<{ 
     loginPage: LoginPage,
@@ -19,6 +20,7 @@ export const test = base.extend<{
     aeSignupLoginPage: AESignupLoginPage,
     aeEnterAccountInfoPage: AEEnterAccountInfoPage,
     aeAccountCreatedPage: AEAccountCreatedPage,
+    aeCartPage: AECartPage,
  }>({
     //fixtures
     swagLabsPage: async ({ page }, use) => {
@@ -42,8 +44,8 @@ export const test = base.extend<{
     },
 
     aeHomePage: async ({ page }, use) => {
-        const aeHomepage = new AEHomepage(page);
-        await use(aeHomepage);
+        const aeHomePage = new AEHomepage(page);
+        await use(aeHomePage);
     },
 
     aeSignupLoginPage: async ({ page }, use) => {
@@ -60,6 +62,11 @@ export const test = base.extend<{
         const aeAccountCreatedPage = new AEAccountCreatedPage(page);
         await use(aeAccountCreatedPage);
     },
+
+    aeCartPage: async ({ page }, use) => {
+        const aeCartPage = new AECartPage(page);
+        await use(aeCartPage);
+    }
     
 });
 
