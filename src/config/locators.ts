@@ -8,6 +8,7 @@ export const LOCATORS = { // Singleton-like locators object pattern
         usernameSelector: 'input[data-qa="login-email"]',
         passwordSelector: 'input[data-qa="login-password"]',
         loginButtonSelector: 'button[data-qa="login-button"]',
+        logoutButtonSelector: '//a[normalize-space(text())="Logout"]',
     }
 }
 

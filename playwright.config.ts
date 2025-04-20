@@ -1,6 +1,9 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 
 const config: PlaywrightTestConfig = {
+    // Workers configuration
+    workers: 1, 
+    
     //se especifica el navegador predeterminado 
     use: {
         browserName: 'chromium',
@@ -9,8 +12,8 @@ const config: PlaywrightTestConfig = {
         launchOptions: {
             args: ['--start-maximized'],
         },
-        screenshot: 'only-on-failure', //captura screenshots solo en caso de fallos
-        trace: 'retain-on-failure', //guarda trazas solo en caso de fallos
+        screenshot: 'on', //captura screenshots solo en caso de fallos
+        trace: 'on', //guarda trazas solo en caso de fallos
     },
 
     //configuracion de los reportes

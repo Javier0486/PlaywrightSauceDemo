@@ -53,4 +53,10 @@ export class LoginManager { // Facade Pattern implementation
         await loginPage.navigate(AE_URL);
         await loginPage.login(credentials.automationExercise.AEUSERNAME, credentials.automationExercise.AEPASSWORD);
     }
+
+    async logoutFromAutomationExercise() {
+        const { automationExercise } = LOCATORS;
+
+        await this.page.click(automationExercise.logoutButtonSelector);
+    }
 }
