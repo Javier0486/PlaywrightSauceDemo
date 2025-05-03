@@ -59,4 +59,23 @@ export class LoginManager { // Facade Pattern implementation
 
         await this.page.click(automationExercise.logoutButtonSelector);
     }
+
+    async loginToLiverpool() {
+        const { LIVERPOOL_URL, credentials } = ENV_CONFIG;
+        const { liverpool } = LOCATORS;
+
+        // Initialize loginPage with Liverpool-specific credentials
+        const loginPage = new LoginPage(
+            this.page,
+            liverpool.usernameSelector,
+            liverpool.passwordSelector,
+            liverpool.loginButtonSelector
+        );
+        await loginPage.navigate(LIVERPOOL_URL);
+        await loginPage.login(
+            credentials.liverpool.LUSERNAME,
+            credentials.liverpool.LPASSWORD
+        );
+    }
+
 }

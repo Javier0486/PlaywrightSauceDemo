@@ -13,6 +13,7 @@
 export const ENV_CONFIG = { 
     BASE_URL: 'https://www.saucedemo.com',
     AE_URL: 'https://www.automationexercise.com/login',
+    LIVERPOOL_URL: 'https://www.liverpool.com.mx/tienda/home',
     credentials: {
         saucedemo: {
             USERNAME: 'standard_user',
@@ -22,6 +23,10 @@ export const ENV_CONFIG = {
             AEUSERNAME: 'javiermm1986@gmail.com',
             AEPASSWORD: 'Password123'
         },
+        liverpool: {
+            LUSERNAME: 'javiertraining1986@gmail.com',
+            LPASSWORD: 'Password1986'
+        }
     },
 };
 

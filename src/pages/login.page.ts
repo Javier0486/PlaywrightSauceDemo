@@ -1,5 +1,4 @@
 import { Page, Locator } from "playwright";
-import { ENV_CONFIG } from "../config/config";
 
 /**
  * Page Object Model for login page functionality.

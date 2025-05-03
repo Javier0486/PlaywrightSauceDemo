@@ -9,6 +9,13 @@ export const LOCATORS = { // Singleton-like locators object pattern
         passwordSelector: 'input[data-qa="login-password"]',
         loginButtonSelector: 'button[data-qa="login-button"]',
         logoutButtonSelector: '//a[normalize-space(text())="Logout"]',
+    },
+    liverpool: {
+        usernameSelector: '#username',
+        passwordSelector: '#password',
+        loginButtonSelector: '//button[normalize-space(text())="Iniciar sesión"]',
+        usernameMenuSelector: '.a-header__topLink',
+        logoutLocator: "//a[normalize-space(text())='Cerrar sesión']"
     }
 }
 
