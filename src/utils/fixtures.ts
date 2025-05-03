@@ -9,6 +9,9 @@ import AESignupLoginPage from '../pages/automationexercise/aeSignupLogin.page';
 import AEEnterAccountInfoPage from '../pages/automationexercise/aeEnterAccountInfo.page';
 import AEAccountCreatedPage from '../pages/automationexercise/aeAccountCreated.page';
 import AECartPage from '../pages/automationexercise/aeCart.page';
+import LivHomepage from '../pages/liverpool/livHomepage.page';
+import LivBuyPage from '../pages/liverpool/livBuy.page';
+import LivSearchPage from '../pages/liverpool/livSearch.page';
 
 export const test = base.extend<{ 
     loginPage: LoginPage,
@@ -21,6 +24,11 @@ export const test = base.extend<{
     aeEnterAccountInfoPage: AEEnterAccountInfoPage,
     aeAccountCreatedPage: AEAccountCreatedPage,
     aeCartPage: AECartPage,
+
+    //liverpool
+    livHomepage: LivHomepage,
+    livSearchpage: LivSearchPage,
+    livBuypage: LivBuyPage,
  }>({
     //fixtures
     swagLabsPage: async ({ page }, use) => {
@@ -66,8 +74,21 @@ export const test = base.extend<{
     aeCartPage: async ({ page }, use) => {
         const aeCartPage = new AECartPage(page);
         await use(aeCartPage);
-    }
+    },
     
+    // Liverpool
+    livHomepage: async ({ page }, use) => {
+        const livHomepage = new LivHomepage(page);
+        await use(livHomepage);
+    },
+    livSearchpage: async ({ page }, use) => {
+        const livSearchpage = new LivSearchPage(page);
+        await use(livSearchpage);
+    },
+    livBuypage: async ({ page }, use) => {
+        const livBuypage = new LivBuyPage(page);
+        await use(livBuypage);
+    }
 });
 
 export { expect } from '@playwright/test';
