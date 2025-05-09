@@ -9,6 +9,7 @@ const config: PlaywrightTestConfig = {
         browserName: 'chromium',
         headless: false, //se ejecuta en modo headless (sin interfaz grafica) o no
         viewport: null, //tamaño de la ventana del navegador
+        permissions: [], // deniega todos los permisos
         launchOptions: {
             args: ['--start-maximized'],
         },
