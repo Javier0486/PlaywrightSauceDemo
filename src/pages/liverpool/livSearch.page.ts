@@ -9,6 +9,8 @@ export default class LivSearchPage {
     readonly priceLocator: (productName: string) => Locator;
     readonly searchFilterLocator: (optionName: string) => Locator;
     readonly productCardLocator: Locator;
+    readonly brandSearchInputLocator: Locator;
+    readonly brandInSearchLocator: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -18,6 +20,8 @@ export default class LivSearchPage {
         this.priceLocator = (productName: string) => this.page.locator(`//h3[normalize-space(text())='${productName}']/ancestor::article[@class="ipod-d-block"]/following-sibling::div//p[contains(., "$")]`);
         this.searchFilterLocator = (optionName: string) => this.page.locator(`//label[contains(., '${optionName}')]`);
         this.productCardLocator = this.page.locator('.m-product__card');
+        this.brandSearchInputLocator = this.page.locator('#searchBrand');
+        this.brandInSearchLocator = this.page.locator('.a-card-brand');
     }
 
     public async clickOnProduct(product: string){
@@ -109,11 +113,12 @@ export default class LivSearchPage {
     private async _waitForProductListToUpdate(previousIds: string[]): Promise<void> {
         await expect.poll(
             async () => {
-                const count = await this.productCardLocator.count();
+                const elements = await this.productCardLocator.elementHandles();
                 const ids = [];
-                for (let i=0; i<count; i++){
-                    const id = await this.productCardLocator.nth(i).getAttribute('data-prodid');
-                    ids.push(id);
+
+                for (const el of elements){
+                    const id = await el.getAttribute('data-prodid');
+                    if (id) ids.push(id);
                 }
                 return ids;
             },
@@ -121,7 +126,7 @@ export default class LivSearchPage {
                 timeout: 15000,
                 message: 'Timed out waiting for product list ti update',
             }
-        ).not.toBe(previousIds);
+        ).not.toEqual(previousIds);
     }
 
     private async _getVisibleProductIds(): Promise<string[]> {
@@ -137,11 +142,25 @@ export default class LivSearchPage {
     }
 
     private async _waitForAllProductsVisible(): Promise<void> {
-        await this.page.waitForLoadState('networkidle');
+        //await this.page.waitForLoadState('networkidle');
         const count = await this.productCardLocator.count();
         for(let i=0; i<count; i++) {
             await expect(this.productCardLocator.nth(i)).toBeVisible({ timeout: 10000 });
             await expect(this.productCardLocator.nth(i)).toHaveAttribute('data-prodid', /.+/, { timeout: 10000 });
+        }
+    }
+
+    public async searchBrand(brandName: string) {
+        const brandElement = this.brandSearchInputLocator;
+        await brandElement.fill(brandName);
+    }
+
+    public async validateProductBrandSearch(brandName: string) {
+        const count = await this.productCardLocator.count();
+        const caseInsensitive = new RegExp(`^${brandName}$`, 'i');
+
+        for(let i=1; i<count; i++){
+            await expect.soft(this.brandInSearchLocator.nth(i)).toHaveText(caseInsensitive);
         }
     }
 

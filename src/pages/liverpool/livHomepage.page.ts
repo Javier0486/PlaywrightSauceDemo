@@ -1,23 +1,25 @@
 import { Page, Locator } from "playwright";
+import { expect } from "playwright/test";
 
 export default class LivHomepage {
     private page: Page;
 
     readonly searchLocator: Locator;
-    readonly categoriasLocator: Locator; 
+    readonly categoriasLocator: (optionName: string) => Locator; 
     readonly menuOptionsLocator: (optionName: string) => Locator;
     readonly iconBulletLocator: Locator;
     readonly categoryProductLocator: (categoryName: string) => Locator;
+    readonly categoryMenuLogoLocator: Locator;
 
     constructor(page: Page){
         this.page = page;
 
         this.searchLocator = this.page.locator('#mainSearchbar').first();
-        this.categoriasLocator = this.page.locator("//span[normalize-space(text())='Categorías']");
+        this.categoriasLocator = (optionName: string) => this.page.locator(`//span[normalize-space(text())='${optionName}']`);
         this.menuOptionsLocator = (optionName: string) => this.page.locator(`//a[normalize-space(text())='${optionName}']`);
         this.iconBulletLocator = this.page.locator('.iconBullet');
         this.categoryProductLocator = (categoryName: string) => this.page.locator(`//a[normalize-space(text())='${categoryName}']`);
-
+        this.categoryMenuLogoLocator = this.page.locator('.i-header-logo')
     }
 
     public async searchProduct(product: string, categoryProd?: string) {
@@ -79,6 +81,26 @@ export default class LivHomepage {
 
     private async _clickOnProductCategory(product: string){
         await this.categoryProductLocator(product).click();
+    }
+
+    public async clickOptionsInPage(optionInPage: string) {
+        await this.categoriasLocator(optionInPage).click();
+    }
+
+    public async mouseOverCategory(option: string) {
+        await this.categoryProductLocator(option).hover();
+    }
+
+    public async clickCategory(option: string) {
+        await this.categoryProductLocator(option).click();
+    }
+
+    public async validateCategoryMenuLogo() {
+        await expect(this.categoryMenuLogoLocator).toBeTruthy();
+    }
+
+    public async validateOptionMenuDisplayed(submenuOption: string) {
+        await expect(this.categoryProductLocator(submenuOption)).toBeTruthy()
     }
 
 }
