@@ -31,9 +31,10 @@ test.describe('Test to validate the filters in the search page', () => {
 
         await test.step('Step 4: select greater than $10000.0 and validate the results count is correct', async () => {
             const resultsCount = await livSearchpage.takeNumberOfProducts(filterTwo);
-            console.log(`the total should be: ${resultsCount}`)
-            
+
             await livSearchpage.selectRadioButton(filterTwo, sectionTwo);
+
+            await page.waitForTimeout(5000);
 
             await livSearchpage.validateResultsCount(resultsCount);
         })
