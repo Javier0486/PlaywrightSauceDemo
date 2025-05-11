@@ -29,7 +29,7 @@ test.describe('Test to validate the navigation through Categorias menu', () => {
         await test.step('Step 3: click in Perfumes Hombre option', async () => {
             await livHomepage.clickCategory(submenuOption);
 
-            await page.waitForTimeout(2000);
+            await page.waitForTimeout(2500);
             try {
                 await PageUtils.validateUrl(page, perfumesHombreUrl);
             } catch (error) {

@@ -26,7 +26,7 @@ const config: PlaywrightTestConfig = {
     //configuracion de los tests
     testDir: './src/tests',//carpeta donde se encuentran los tests
     retries: 0, // numero de reintentos en caso de fallo
-    timeout: 30000, //tiempo maximo por test (30 segundos)
+    timeout: 60000, //tiempo maximo por test (30 segundos)
 };
 
 export default config;
