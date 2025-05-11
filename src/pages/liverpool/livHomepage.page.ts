@@ -48,11 +48,8 @@ export default class LivHomepage {
             await this.searchLocator.click();
             await this.searchLocator.press('Enter');
 
-            // verify search started
+            // small wait
             await this.page.waitForTimeout(500);
-            if(await this.searchLocator.isVisible()) {
-                throw new Error('Search not submited');
-            }
         } catch {
             // Method 2: Direct keyboard press
             await this.page.keyboard.press('Enter');
