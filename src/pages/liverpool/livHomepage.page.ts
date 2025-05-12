@@ -48,8 +48,11 @@ export default class LivHomepage {
             await this.searchLocator.click();
             await this.searchLocator.press('Enter');
 
-            // small wait
+            // verify search started
             await this.page.waitForTimeout(500);
+            if(await this.searchLocator.isVisible()) {
+                throw new Error('Search not submited');
+            }
         } catch {
             // Method 2: Direct keyboard press
             await this.page.keyboard.press('Enter');
@@ -68,8 +71,6 @@ export default class LivHomepage {
             await Promise.race([
                 this.page.waitForURL(/tienda/),
                 this.page.waitForSelector('.m-product__listingPlp', { state: 'visible', timeout: 15000 }),
-                this.page.waitForResponse(res => res.url().includes('search')
-                )
             ])
         } catch (error) {
             throw new Error(`Search results didn't appear: ${error}`);
