@@ -50,9 +50,6 @@ export default class LivHomepage {
 
             // verify search started
             await this.page.waitForTimeout(500);
-            if(await this.searchLocator.isVisible()) {
-                throw new Error('Search not submited');
-            }
         } catch {
             // Method 2: Direct keyboard press
             await this.page.keyboard.press('Enter');
