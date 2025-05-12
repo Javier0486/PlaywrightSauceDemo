@@ -30,11 +30,12 @@ export default class LivHomepage {
         await this.searchLocator.fill(product);
 
         await this._submitSearchWithRetry();
-        //await this.page.waitForTimeout(15000);
+        await this.page.waitForTimeout(10000);
 
         await this._waitForSearchResults();
 
         if(categoryProd && await this.iconBulletLocator.isVisible()) {
+            await expect(this.categoriasLocator(categoryProd)).toBeTruthy();
             await this._clickOnProductCategory(categoryProd);
             await this.page.waitForSelector('.m-product__listingPlp')
         }
@@ -68,6 +69,7 @@ export default class LivHomepage {
             await Promise.race([
                 this.page.waitForURL(/tienda/),
                 this.page.waitForSelector('.m-product__listingPlp', { state: 'visible', timeout: 15000 }),
+                this.page.waitForResponse(res => res.url().includes('search')),
             ])
         } catch (error) {
             throw new Error(`Search results didn't appear: ${error}`);
