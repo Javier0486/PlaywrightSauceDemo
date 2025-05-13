@@ -68,7 +68,6 @@ export default class LivHomepage {
             await Promise.race([
                 this.page.waitForURL(/tienda/),
                 this.page.waitForSelector('.m-product__listingPlp', { state: 'visible', timeout: 15000 }),
-                this.page.waitForResponse(res => res.url().includes('search')),
             ])
         } catch (error) {
             throw new Error(`Search results didn't appear: ${error}`);
