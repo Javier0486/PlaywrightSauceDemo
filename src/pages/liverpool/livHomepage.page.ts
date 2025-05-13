@@ -43,7 +43,6 @@ export default class LivHomepage {
     }
 
     private async _submitSearchWithRetry() {
-        //try different methods to submit search
         try {
             // Method 1: Direct press on search field
             await this.searchLocator.click();
@@ -64,7 +63,7 @@ export default class LivHomepage {
     }
 
     private async _waitForSearchResults() {
-        // Try multiple ways to confirm search completed
+        // Multiple ways to confirm search completed
         try {
             await Promise.race([
                 this.page.waitForURL(/tienda/),
