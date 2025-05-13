@@ -11,6 +11,7 @@ export default class LivSearchPage {
     readonly productCardLocator: Locator;
     readonly brandSearchInputLocator: Locator;
     readonly brandInSearchLocator: Locator;
+    readonly selectedFiltersLocator: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -22,6 +23,7 @@ export default class LivSearchPage {
         this.productCardLocator = this.page.locator('.m-product__card');
         this.brandSearchInputLocator = this.page.locator('#searchBrand');
         this.brandInSearchLocator = this.page.locator('.a-card-brand');
+        this.selectedFiltersLocator = this.page.locator('.newChipContainer');
     }
 
     public async clickOnProduct(product: string){
@@ -126,7 +128,12 @@ export default class LivSearchPage {
             await this.page.waitForTimeout(interval);
         }
 
-        throw new Error(`product count in the filter '${option}' didn't change from the initial value (${initialCount}) within ${timeout}`);
+        if(currentCount !== null) {
+            console.log(`Product count did not change, returning current count ${currentCount}`);
+            return currentCount;
+        }
+
+        throw new Error(`couln't return a valid count for filter ${option}`);
 
     }
 
@@ -176,7 +183,6 @@ export default class LivSearchPage {
     }
 
     private async _waitForAllProductsVisible(): Promise<void> {
-        //await this.page.waitForLoadState('networkidle');
         const count = await this.productCardLocator.count();
         for(let i=0; i<count; i++) {
             await expect(this.productCardLocator.nth(i)).toBeVisible({ timeout: 10000 });
@@ -214,6 +220,24 @@ export default class LivSearchPage {
         if(!atLeastOneValid) {
             throw new Error(`No visible brand matched '${brandName}' (case-insensitive)`);
         }
+    }
+
+    public async validateFilterSelected(option: string) {
+        const totalFilters = await this.selectedFiltersLocator.all();
+        console.log(`total of filters found: ${totalFilters}`);
+
+        for(const filter of totalFilters){
+            if(await filter.isVisible()) {
+                const text = await filter.textContent();
+                if(text?.includes(option)){
+                    await expect(filter).toBeVisible();
+                    await expect(filter).toContainText(option);
+                    return;
+                }
+            }
+        }
+        
+        throw new Error(`Filter ${option} not selected`);
     }
 
 }

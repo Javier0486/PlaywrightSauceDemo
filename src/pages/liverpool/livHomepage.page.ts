@@ -63,7 +63,7 @@ export default class LivHomepage {
     }
 
     private async _waitForSearchResults() {
-        // Multiple ways to confirm search completed
+        // Different ways to confirm search completed
         try {
             await Promise.race([
                 this.page.waitForURL(/tienda/),
