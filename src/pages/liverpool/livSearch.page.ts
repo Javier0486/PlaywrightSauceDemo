@@ -103,7 +103,9 @@ export default class LivSearchPage {
         await filterLocator.waitFor({ state: 'visible' });
 
         const initialText = await filterLocator.innerText();
-        const initialMatch = initialText.match(/\((\d+)\)/);
+        const initialMatch = initialText.match(/\((\d+)\)/); // ["(42)", "42"]
+
+
         const initialCount = initialMatch ? parseInt(initialMatch[1], 10) : null;
 
         const timeout = 6000;
@@ -165,7 +167,7 @@ export default class LivSearchPage {
             },
             {
                 timeout: 15000,
-                message: 'Timed out waiting for product list ti update',
+                message: 'Timed out waiting for product list to update',
             }
         ).not.toEqual(previousIds);
     }
