@@ -72,6 +72,7 @@ export class LoginManager { // Facade Pattern implementation
             liverpool.loginButtonSelector
         );
         await loginPage.navigate(LIVERPOOL_URL);
+        await this.page.locator('.a-header__topLink').last().click();
         await loginPage.login(
             credentials.liverpool.LUSERNAME,
             credentials.liverpool.LPASSWORD

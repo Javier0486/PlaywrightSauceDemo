@@ -1,5 +1,6 @@
 import { ENV_CONFIG } from "../../config/config";
 import { expect, test } from "../../utils/fixtures";
+import { LoginManager } from "../../utils/LoginManager";
 import { PageUtils } from "../../utils/PageUtils";
 
 test.describe('Test to validate the navigation through Categorias menu', () => {
@@ -17,6 +18,8 @@ test.describe('Test to validate the navigation through Categorias menu', () => {
 
         await test.step('Step 1: click in Categorias menu', async () => {
             await page.goto(ENV_CONFIG.LIVERPOOL_URL);
+            /*const loginManager = new LoginManager(page);
+            await loginManager.loginToLiverpool();*/
             await livHomepage.clickOptionsInPage(categoriasOption);
             await livHomepage.validateCategoryMenuLogo();
         })
