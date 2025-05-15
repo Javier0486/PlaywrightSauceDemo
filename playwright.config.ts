@@ -13,8 +13,8 @@ const config: PlaywrightTestConfig = {
         launchOptions: {
             args: ['--start-maximized'],
         },
-        screenshot: 'on', //captura screenshots solo en caso de fallos
-        trace: 'on', //guarda trazas solo en caso de fallos
+        screenshot: 'on', //captura screenshots
+        trace: 'on', //guarda trazas
     },
 
     //configuracion de los reportes
