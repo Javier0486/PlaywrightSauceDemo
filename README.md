@@ -17,7 +17,7 @@
 # -	Custom fixtures for each page
 
 ### PageUtils.ts
-# -	Provides common page operations as reusable utilities
+# -	Implements utility pattern by providing a class with only static methods and no instance state. This allows to call common reusable page operation from anywhere in the tests without creating and object instance
 # -	Can be used across different pages/tests
 
 ### tsconfig.json
