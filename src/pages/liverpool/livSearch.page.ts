@@ -202,7 +202,7 @@ export default class LivSearchPage {
 
     public async validateProductBrandSearch(brandName: string) {
         const caseInsensitive = new RegExp(`^${brandName}$`, 'i');
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('domcontentloaded');
                 
         const totalBrands = await this.brandInSearchLocator.all();
         console.log(`total brand Elements found: ${totalBrands}`);
