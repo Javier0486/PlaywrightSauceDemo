@@ -1,5 +1,5 @@
 import { ENV_CONFIG } from "../../config/config";
-import { test } from "../../utils/fixtures";
+import { test } from "../../fixtures/fixtures";
 
 test.describe('Test to validate the product name and product price in the Buy page', () => {
     test('validate the product selected displayed the product name and price in the Buy page', async ({

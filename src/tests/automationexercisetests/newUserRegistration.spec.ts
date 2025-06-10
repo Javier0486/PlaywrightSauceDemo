@@ -1,7 +1,7 @@
 import { aeTopMenuOptions } from "../../utils/automationexerciseutils/aeMenuOptionsEnum";
 import { PageUtils } from "../../utils/PageUtils";
 import { expect } from "playwright/test";
-import { test } from "../../utils/fixtures";
+import { test } from "../../fixtures/fixtures";
 import { AEUrls } from "../../utils/automationexerciseutils/aeUrlsEnum";
 import { AEElementFieldsSignupLogin } from "../../utils/automationexerciseutils/inputSigupLoginEnum";
 import { ENV_CONFIG } from "../../config/config";

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "soloTest": "npx playwright test [testName.spec.ts] --repeat-each=5",
+    "soloTest": "npx playwright test validateSearchFilters.spec.ts --repeat-each=1",
     "test:api": "npx playwright test src/tests/apiTests/[testName.spec.ts]"
   },
   "keywords": [],

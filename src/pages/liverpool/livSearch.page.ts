@@ -13,6 +13,8 @@ export default class LivSearchPage {
     readonly brandInSearchLocator: Locator;
     readonly selectedFiltersLocator: Locator;
 
+
+
     constructor(page: Page){
         this.page = page;
 
@@ -24,6 +26,7 @@ export default class LivSearchPage {
         this.brandSearchInputLocator = this.page.locator('#searchBrand');
         this.brandInSearchLocator = this.page.locator('.a-card-brand');
         this.selectedFiltersLocator = this.page.locator('.newChipContainer');
+
     }
 
     public async clickOnProduct(product: string){

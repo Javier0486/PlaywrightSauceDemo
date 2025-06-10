@@ -1,6 +1,6 @@
 import { ENV_CONFIG } from "../../config/config";
-import { expect, test } from "../../utils/fixtures";
-import { LoginManager } from "../../utils/LoginManager";
+import { expect, test } from "../../fixtures/fixtures";
+import { LoginManager } from "../../managers/LoginManager";
 import { PageUtils } from "../../utils/PageUtils";
 
 test.describe('Test to validate the navigation through Categorias menu', () => {

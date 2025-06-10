@@ -1,11 +1,12 @@
 import { ENV_CONFIG } from "../../config/config";
-import { expect, test } from "../../utils/fixtures";
+import { expect, test } from "../../fixtures/fixtures";
 
 test.describe('Test to validate the filters in the search page', () => {
     test('validate size and price filters', async ({
         page,
         livHomepage,
         livSearchpage,
+        livBuypage,
     }) => {
         const searchProduct = 'smart tv';
         const filterOne = '55 pulgadas';
@@ -53,12 +54,23 @@ test.describe('Test to validate the filters in the search page', () => {
             const resultsCount = await livSearchpage.takeNumberOfProducts(filterThree);
 
             await livSearchpage.selectCheckbox(filterThree, sectionThree);
-            await page.waitForTimeout(4000);
+            await page.waitForTimeout(5000);
             await livSearchpage.validateFilterSelected(filterThree);
 
             await page.waitForTimeout(5000);
 
             await livSearchpage.validateResultsCount(resultsCount)
+        })
+
+        await test.step('Step 6: select any smart tv and validate the green banner appears', async () => {
+            await livSearchpage.productCardLocator.first().click();
+
+            //await livBuypage.addToCartLocator.click();
+
+            //await livBuypage.guarantyButtonsLocator.click();
+
+            //await expect(await livBuypage.greenAddBannerLocator).toBeTruthy();
+            await livBuypage.addProductNoGuarantyAndValidateGreenAlert();
         })
 
     })

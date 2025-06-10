@@ -1,6 +1,6 @@
 import { aeTopMenuOptions } from "../../utils/automationexerciseutils/aeMenuOptionsEnum";
-import { test, expect } from "../../utils/fixtures";
-import { LoginManager } from "../../utils/LoginManager";
+import { test, expect } from "../../fixtures/fixtures";
+import { LoginManager } from "../../managers/LoginManager";
 import { AEColumnTableCart } from "../../utils/automationexerciseutils/cartColumnEnum";
 
 test.describe('Test to validate the products added in the cart', () => {

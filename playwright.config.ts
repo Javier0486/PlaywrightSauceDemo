@@ -15,6 +15,7 @@ const config: PlaywrightTestConfig = {
         },
         screenshot: 'on', //captura screenshots
         trace: 'on', //guarda trazas
+        video: 'on',
     },
 
     //configuracion de los reportes
@@ -26,7 +27,7 @@ const config: PlaywrightTestConfig = {
     //configuracion de los tests
     testDir: './src/tests',//carpeta donde se encuentran los tests
     retries: 0, // numero de reintentos en caso de fallo
-    timeout: 60000, //tiempo maximo por test (60 segundos)
+    timeout: 99000, //tiempo maximo por test
 };
 
 export default config;

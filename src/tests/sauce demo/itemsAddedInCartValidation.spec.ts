@@ -1,5 +1,5 @@
-import { expect, test } from "../../utils/fixtures";
-import { LoginManager } from "../../utils/LoginManager";
+import { expect, test } from "../../fixtures/fixtures";
+import { LoginManager } from "../../managers/LoginManager";
 import { productsInHomepage } from "../../utils/saucedemoutils/productsEnum";
 
 test.describe('Test para validar que los productos agregados al carrito sean los esperados', () => {

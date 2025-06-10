@@ -1,8 +1,8 @@
 import { aeTopMenuOptions } from "../../utils/automationexerciseutils/aeMenuOptionsEnum";
-import { expect, test } from "../../utils/fixtures";
+import { expect, test } from "../../fixtures/fixtures";
 import { AEUrls } from "../../utils/automationexerciseutils/aeUrlsEnum";
 import { AEElementFieldsSignupLogin } from "../../utils/automationexerciseutils/inputSigupLoginEnum";
-import { LoginManager } from "../../utils/LoginManager";
+import { LoginManager } from "../../managers/LoginManager";
 import { PageUtils } from "../../utils/PageUtils";
 
 test.describe('Test automation exercise page', () => {
