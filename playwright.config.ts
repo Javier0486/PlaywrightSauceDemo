@@ -7,7 +7,7 @@ const config: PlaywrightTestConfig = {
     //se especifica el navegador predeterminado 
     use: {
         browserName: 'chromium',
-        headless: false, //se ejecuta en modo headless (sin interfaz grafica)
+        headless: true, //se ejecuta en modo headless (sin interfaz grafica)
         viewport: null, //tamaño de la ventana del navegador
         permissions: [], // deniega todos los permisos
         launchOptions: {
