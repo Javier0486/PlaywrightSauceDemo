@@ -36,3 +36,23 @@ jobs:
 
       - name: Dump GitHub context
         run: echo "${{ toJson(github) }}"
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: List Playwright  report directory content
+        run: |
+          ls -la playwright-report/
+          # You can also use 'find playwright-report/' for more details
+        # Add an 'if' condition if you only want this to run on failure
+        if: always()
+
+      - name: Upload Playwright report (optional)
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: playwright-report
+          path: playwright-report
+          # Add this to explicitky error if no files are found
+          if-no-files-found: error
+
