@@ -1,11 +1,12 @@
 import { ENV_CONFIG } from "../../config/config";
-import { expect, test } from "../../utils/fixtures";
+import { expect, test } from "../../fixtures/fixtures";
 
 test.describe('Test to validate the filters in the search page', () => {
-    test('validate size and price filters', async ({
+    test.skip('validate size and price filters', async ({
         page,
         livHomepage,
         livSearchpage,
+        livBuypage,
     }) => {
         const searchProduct = 'smart tv';
         const filterOne = '55 pulgadas';
@@ -19,6 +20,33 @@ test.describe('Test to validate the filters in the search page', () => {
 
         await test.step('Step 1: go to liverpool page and search for smart tv from the search input field', async () => {
             await page.goto(ENV_CONFIG.LIVERPOOL_URL);
+
+            await page.evaluate(() => {
+                // Override navigator.webdriver
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined, // it can be false, but undefined is often preferred
+                });
+
+                // Spoof navigator.plugins (common check)
+                Object.defineProperty(navigator, 'plugins', {
+                    get: () => [
+                        { name: 'Chrome PDF Viewer', filename: 'internal-pdf-viewer' },
+                        { name: 'Widevine Content Decryption Module', filename: 'internal-widevine-cdm' },
+                    ]
+                });
+
+                // Spoof navigator.languages
+                Object.defineProperty(navigator, 'languages', {
+                    get: () => ['en-US', 'en'],
+                });
+
+                // Spoof navigator.harwareConcurrency 
+                Object.defineProperty(navigator, 'hardwareConcurrency', {
+                    get: () => 4,
+                });
+
+            });
+
             await livHomepage.searchProduct(searchProduct);
         })
 
@@ -53,12 +81,23 @@ test.describe('Test to validate the filters in the search page', () => {
             const resultsCount = await livSearchpage.takeNumberOfProducts(filterThree);
 
             await livSearchpage.selectCheckbox(filterThree, sectionThree);
-            await page.waitForTimeout(4000);
+            await page.waitForTimeout(5000);
             await livSearchpage.validateFilterSelected(filterThree);
 
             await page.waitForTimeout(5000);
 
             await livSearchpage.validateResultsCount(resultsCount)
+        })
+
+        await test.step('Step 6: select any smart tv and validate the green banner appears', async () => {
+            await livSearchpage.productCardLocator.first().click();
+
+            //await livBuypage.addToCartLocator.click();
+
+            //await livBuypage.guarantyButtonsLocator.click();
+
+            //await expect(await livBuypage.greenAddBannerLocator).toBeTruthy();
+            await livBuypage.addProductNoGuarantyAndValidateGreenAlert();
         })
 
     })

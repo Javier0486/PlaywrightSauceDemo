@@ -37,3 +37,69 @@
 #### o	playwright test runner (“@playwright/test”)
 #### o	typescript type definitions (“@types/ajv” and “@types/node”)
 #### o	typescript compiler (“typescript”)
+
+# Project Structure
+playwright-saucedemo/
+│
+├── src/
+│   ├── tests/              # Test files
+│   ├── Config.ts           # Environment config (singleton)
+│   ├── Locator.ts          # Page locators (singleton)
+│   ├── LoginManager.ts     # Login facade
+│   ├── login.page.ts       # Login page object
+│   ├── fixtures.ts         # Custom Playwright fixtures
+│   └── PageUtils.ts        # Static utility methods
+│
+├── playwright.config.ts    # Playwright runner config
+├── package.json            # Project metadata, scripts, dependencies
+├── tsconfig.json           # TypeScript compiler options
+└── README.md               # Project documentation
+
+# Framework Flow Diagram
++----------------------+
+|    Test File         |  (e.g., login.spec.ts)
++----------+-----------+
+           |
+           v
++----------------------+
+|   Custom Fixtures    |  (fixtures.ts: sets up browser/page context)
++----------+-----------+
+           |
+           v
++----------------------+
+|   LoginManager       |  (Facade: handles login logic)
++----------+-----------+
+           |
+           v
++----------------------+
+|   Login Page Object  |  (login.page.ts: page actions)
++----------+-----------+
+           |
+           v
++----------------------+
+|     Locator          |  (Locator.ts: selectors)
++----------+-----------+
+
++----------------------+
+|     Config           |  (Config.ts: env/credentials)
++----------------------+
+
++----------------------+
+|   PageUtils          |  (Static utility methods)
++----------------------+
+
+* Legend:
+
+- Test File: Your test scripts (e.g., login.spec.ts)
+- Custom Fixtures: Sets up Playwright context and provides fixtures
+- LoginManager: Facade for login actions
+- Login Page Object: Encapsulates login page interactions
+- Locator: Centralized selectors
+- Config: Environment and credential management
+- PageUtils: Reusable static utility methods
+
+## How the flow files work toghether
+- Tests use fixtures to get browser/page context.
+- LoginManager (Facade) provides high-level login methods, using login.page.ts (POM) and Locators.ts (Singleton).
+- Config.ts (Singleton) provides environment data everywhere.
+- PageUtils.ts offers reusable static helpers.

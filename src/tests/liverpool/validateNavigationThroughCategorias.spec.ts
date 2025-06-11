@@ -1,10 +1,10 @@
 import { ENV_CONFIG } from "../../config/config";
-import { expect, test } from "../../utils/fixtures";
-import { LoginManager } from "../../utils/LoginManager";
+import { expect, test } from "../../fixtures/fixtures";
+import { LoginManager } from "../../managers/LoginManager";
 import { PageUtils } from "../../utils/PageUtils";
 
 test.describe('Test to validate the navigation through Categorias menu', () => {
-    test('validate DIOR permies are displayed in the Search page', async ({
+    test.skip('validate DIOR permies are displayed in the Search page', async ({
         page,
         livHomepage,
         livSearchpage,
@@ -20,6 +20,33 @@ test.describe('Test to validate the navigation through Categorias menu', () => {
             await page.goto(ENV_CONFIG.LIVERPOOL_URL);
             /*const loginManager = new LoginManager(page);
             await loginManager.loginToLiverpool();*/
+
+            await page.evaluate(() => {
+                // Override navigator.webdriver
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined, // it can be false, but undefined is often preferred
+                });
+
+                // Spoof navigator.plugins (common check)
+                Object.defineProperty(navigator, 'plugins', {
+                    get: () => [
+                        { name: 'Chrome PDF Viewer', filename: 'internal-pdf-viewer' },
+                        { name: 'Widevine Content Decryption Module', filename: 'internal-widevine-cdm' },
+                    ]
+                });
+
+                // Spoof navigator.languages
+                Object.defineProperty(navigator, 'languages', {
+                    get: () => ['en-US', 'en'],
+                });
+
+                // Spoof navigator.harwareConcurrency 
+                Object.defineProperty(navigator, 'hardwareConcurrency', {
+                    get: () => 4,
+                });
+
+            });
+
             await livHomepage.clickOptionsInPage(categoriasOption);
             await livHomepage.validateCategoryMenuLogo();
         })

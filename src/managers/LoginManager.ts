@@ -1,7 +1,7 @@
 import LoginPage from "../pages/login.page";
 import { ENV_CONFIG } from "../config/config";
 import { Page } from "playwright";
-import { LOCATORS } from "../config/locators";
+import { LOCATORS } from "../locators/locators";
 
 /**
  * Implements Facade Pattern to provide a simplified interface for login operations

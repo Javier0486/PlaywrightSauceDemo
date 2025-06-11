@@ -1,5 +1,5 @@
-import { test, expect } from '../../utils/fixtures';
-import { LoginManager } from '../../utils/LoginManager';
+import { test, expect } from '../../fixtures/fixtures';
+import { LoginManager } from '../../managers/LoginManager';
 
 test('Login test', async ({ page }) => {
     const loginManager = new LoginManager(page);

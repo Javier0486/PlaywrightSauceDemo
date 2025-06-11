@@ -1,6 +1,6 @@
-import { test } from "../../utils/fixtures";
+import { test } from "../../fixtures/fixtures";
 import { productsInHomepage } from "../../utils/saucedemoutils/productsEnum";
-import { LoginManager } from "../../utils/LoginManager";
+import { LoginManager } from "../../managers/LoginManager";
 
 test.describe(`Test para validar los precios en carrito y productos en checkout`, () => {
     test('Agregar productos al carrito y verificar precios; verificar productos en checkout', async ({
