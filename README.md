@@ -97,3 +97,9 @@ playwright-saucedemo/
 - Locator: Centralized selectors
 - Config: Environment and credential management
 - PageUtils: Reusable static utility methods
+
+## How the flow files work toghether
+- Tests use fixtures to get browser/page context.
+- LoginManager (Facade) provides high-level login methods, using login.page.ts (POM) and Locators.ts (Singleton).
+- Config.ts (Singleton) provides environment data everywhere.
+- PageUtils.ts offers reusable static helpers.
