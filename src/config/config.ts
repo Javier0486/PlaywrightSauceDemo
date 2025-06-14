@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
 /**
  * Centralized configuration module containing all environment-specific settings.
  * Implements Singleton Pattern through constant exports to provide:
@@ -14,18 +16,23 @@ export const ENV_CONFIG = {
     BASE_URL: 'https://www.saucedemo.com',
     AE_URL: 'https://www.automationexercise.com/login',
     LIVERPOOL_URL: 'https://www.liverpool.com.mx/',
+    PEEK_URL: 'https://www.peek.com/',
     credentials: {
         saucedemo: {
-            USERNAME: 'standard_user',
-            PASSWORD: 'secret_sauce',
+            USERNAME: process.env.SAUCEDEMO_USERNAME || '',
+            PASSWORD: process.env.SAUCEDEMO_PASSWORD || '',
         },
         automationExercise: {
-            AEUSERNAME: 'javiermm1986@gmail.com',
-            AEPASSWORD: 'Password123'
+            AEUSERNAME: process.env.AE_USERNAME || '',
+            AEPASSWORD: process.env.AE_PASSWORD || '',
         },
         liverpool: {
-            LUSERNAME: 'javiertraining1986@gmail.com',
-            LPASSWORD: 'Password1986'
+            LUSERNAME: process.env.LIVERPOOL_USERNAME || '',
+            LPASSWORD: process.env.LIVERPOOL_PASSWORD || '',
+        },
+        peek: {
+            PEEK_USERNAME: process.env.PEEK_USERNAME || '',
+            PEEK_PASSWORD: process.env.PEEK_PASSWORD || ''
         }
     },
 };

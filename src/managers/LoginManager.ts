@@ -72,10 +72,31 @@ export class LoginManager { // Facade Pattern implementation
             liverpool.loginButtonSelector
         );
         await loginPage.navigate(LIVERPOOL_URL);
-        await this.page.locator('.a-header__topLink').last().click();
+        await this.page.locator(liverpool.usernameMenuSelector).last().click();
         await loginPage.login(
             credentials.liverpool.LUSERNAME,
             credentials.liverpool.LPASSWORD
+        );
+    }
+
+    async loginPeek() {
+        const { PEEK_URL, credentials } = ENV_CONFIG;
+        const { peek } = LOCATORS;
+
+        const loginPage = new LoginPage(
+            this.page,
+            peek.usernameSelector,
+            peek.passwordSelector,
+            peek.loginButtonsSelector,
+        );
+        await loginPage.navigate(PEEK_URL);
+        await this.page.locator(peek.cookiesAcceptSelector).click();
+        await this.page.locator(peek.userButtonSelector).click();
+        await this.page.locator(peek.logsignSelector).click();
+        await this.page.locator(peek.loginButtonInModalSelector).click();
+        await loginPage.login(
+            credentials.peek.PEEK_USERNAME,
+            credentials.peek.PEEK_PASSWORD
         );
     }
 

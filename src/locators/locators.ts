@@ -16,6 +16,15 @@ export const LOCATORS = { // Singleton-like locators object pattern
         loginButtonSelector: '//button[normalize-space(text())="Iniciar sesión"]',
         usernameMenuSelector: '.a-header__topLink',
         logoutLocator: "//a[normalize-space(text())='Cerrar sesión']"
+    },
+    peek: {
+        usernameSelector: '#user_email',
+        passwordSelector: '#user_password',
+        loginButtonsSelector: `//button[normalize-space(text())='Log in']`,
+        userButtonSelector: '//div[@data-integration="nav-panel-button"]',
+        logsignSelector: '//a[@data-integration="login-modal-button"]',
+        loginButtonInModalSelector: '//a[normalize-space(text())="Log in"]',
+        cookiesAcceptSelector: '//button[@data-tid="banner-accept"]',
     }
 }
 
